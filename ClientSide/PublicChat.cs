@@ -1,13 +1,14 @@
 ﻿using Microsoft.AspNetCore.SignalR.Client;
 using System;
 using System.Threading.Tasks;
+using ClientLib;
 
 namespace ClientSide
 {
     public class PublicChat : IChat
     {
-        private readonly ISender _sender;
-        public PublicChat(ISender sender)
+        private readonly IMessageSender _sender;
+        public PublicChat(IMessageSender sender)
         {
             _sender = sender;
         }
@@ -16,12 +17,23 @@ namespace ClientSide
         {
             await connection.StartAsync();
 
+            connection.GlobalMessageHandler(
+                (sender, message) => { Console.WriteLine($"[{sender}]: {message}"); });
+            connection.ChannelMessageHandler(
+                (sender, channel, message) => { Console.WriteLine($"({channel})[{sender}]: {message}"); });
+            connection.PrivateMessageHandler(
+                (sender, message) => { Console.WriteLine($"(PM)[{sender}]: {message}"); });
+
             while (true)
             {
                 Console.WriteLine("Send a message to the chat: ");
                 var message = Console.ReadLine();
+                if (message == "exit")
+                {
+                    return;
+                }
 
-                await _sender.SendMessageAsync(connection, message);
+                await _sender.SendToGlobalAsync(connection, message);
             }
         }
     }

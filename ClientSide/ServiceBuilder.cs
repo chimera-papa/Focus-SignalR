@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using System;
+using ClientLib;
 
 namespace ClientSide
 {
@@ -13,7 +14,7 @@ namespace ClientSide
             var nick = Console.ReadLine();
 
             service
-                .AddSingleton<ISender>(_ => new MessageSender(nick))
+                .AddSingleton<IMessageSender>(_ => new MessageSender(nick))
                 .AddSingleton<IChat, PublicChat>();
 
             return service.BuildServiceProvider();

@@ -1,8 +1,7 @@
+using Common;
 using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
+using ServerSide.Hubs;
 
 namespace ServerSide
 {
@@ -19,7 +18,7 @@ namespace ServerSide
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapHub<Chat>("/Chat");
+                endpoints.MapHub<Message>($"/{HubConstants.MessageHub.Name}");
             });
         }
     }
