@@ -15,7 +15,7 @@ namespace ClientSide
 
             var url = $"https://localhost:5001/{HubConstants.MessageHub.Name}";
 
-            var connection = new HubConnectionBuilder().WithUrl(url).Build();
+            var connection = new HubConnectionBuilder().AddMessagePackProtocol().WithUrl(url).Build();
 
             await chat.ConnectTo(connection);
         }
