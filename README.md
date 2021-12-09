@@ -6,8 +6,18 @@
 - Handling messages in a strongly typed manner;
 
 # General
-- Encryption on top of messages;
+- Channels:
+  - How to join a channel;
+  - Authorization;
+- Private:
+  - Block users;
+  - White list;
+  - Authorization (Message to friends);
 - Send notifications;
+- Authentication;
 
 # Future
+- Protobuf;
+- Testing;
+- Encryption on top of messages;
 - Use this to handle real time game features?

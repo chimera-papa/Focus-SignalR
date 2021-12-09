@@ -22,13 +22,13 @@ namespace ClientLib
         public Task SendToChannelAsync(HubConnection connection, string channel, string message)
         {
             var arguments = new object[] {_nick, channel, message};
-            return connection.InvokeCoreAsync(HubConstants.MessageHub.Global, arguments);
+            return connection.InvokeCoreAsync(HubConstants.MessageHub.Channel, arguments);
         }
 
         public Task SendToPrivateAsync(HubConnection connection, string receivingUser, string message)
         {
             var arguments = new object[] {_nick, receivingUser, message};
-            return connection.InvokeCoreAsync(HubConstants.MessageHub.Global, arguments);
+            return connection.InvokeCoreAsync(HubConstants.MessageHub.Private, arguments);
         }
     }
 
