@@ -2,7 +2,6 @@
 using System;
 using System.Threading.Tasks;
 using ClientLib;
-using Common;
 
 namespace ClientSide
 {
@@ -18,11 +17,9 @@ namespace ClientSide
         {
             await connection.StartAsync();
 
-            connection.GlobalMessageHandler<MessageDto>(dto => { Console.WriteLine($"[{dto.Sender}]: {dto.Message}"); });
-            connection.ChannelMessageHandler(
-                (sender, channel, message) => { Console.WriteLine($"({channel})[{sender}]: {message}"); });
-            connection.PrivateMessageHandler(
-                (sender, message) => { Console.WriteLine($"(PM)[{sender}]: {message}"); });
+            connection.GlobalMessageHandler();
+            connection.ChannelMessageHandler();
+            connection.PrivateMessageHandler();
 
             while (true)
             {

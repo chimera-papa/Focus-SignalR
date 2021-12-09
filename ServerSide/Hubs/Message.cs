@@ -8,24 +8,24 @@ namespace ServerSide.Hubs
     public class Message : Hub
     {
         [HubMethodName(HubConstants.MessageHub.Global)]
-        public async Task SendGlobalMessage(MessageDto message)
+        public async Task SendGlobalMessage(GlobalMessageDto dto)
         {
-            Console.WriteLine($"We found those parameter: {message.Sender}, {message.Message}");
-            await Clients.All.SendAsync(HubConstants.MessageHub.Global, message);
+            Console.WriteLine($"We found those parameter: {dto.Sender}, {dto.Message}");
+            await Clients.All.SendAsync(HubConstants.MessageHub.Global, dto);
         }
 
         [HubMethodName(HubConstants.MessageHub.Channel)]
-        public async Task SendChannelMessage(string nick, string channel, string message)
+        public async Task SendChannelMessage(ChannelMessageDto dto)
         {
-            Console.WriteLine($"We found those parameter: {nick}, {message}");
-            await Clients.Groups(channel).SendAsync(HubConstants.MessageHub.Channel, nick, message);
+            Console.WriteLine($"We found those parameter: {dto.Sender}, {dto.Channel}, {dto.Message}");
+            await Clients.Groups(dto.Channel).SendAsync(HubConstants.MessageHub.Channel, dto);
         }
         
         [HubMethodName(HubConstants.MessageHub.Private)]
-        public async Task SendPrivateMessage(string nick, string receiver, string message)
+        public async Task SendPrivateMessage(PrivateMessageDto dto)
         {
-            Console.WriteLine($"We found those parameter: {nick}, {message}");
-            await Clients.All.SendAsync(HubConstants.MessageHub.Private, nick, message);
+            Console.WriteLine($"We found those parameter: {dto.Sender}, {dto.Receiver}, {dto.Message}");
+            await Clients.All.SendAsync(HubConstants.MessageHub.Private, dto);
         }
     }
 }
