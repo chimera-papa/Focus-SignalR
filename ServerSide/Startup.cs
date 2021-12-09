@@ -14,7 +14,7 @@ namespace ServerSide
     {
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddSignalR();
+            services.AddSignalR().AddMessagePackProtocol();
             
             services.AddSwaggerGen(c =>
             {

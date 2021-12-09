@@ -10,11 +10,11 @@ namespace ClientSide
         {
             var service = new ServiceCollection();
 
-            // Console.WriteLine("Choose a nick: ");
-            // var nick = Console.ReadLine();
+            Console.WriteLine("Choose a nick: ");
+            var nick = Console.ReadLine();
 
             service
-                // .AddSingleton<IMessageSender>(_ => new MessageSender(nick))
+                .AddSingleton<IMessageSender>(_ => new MessageSender(nick!))
                 .AddSingleton<INotification, Notification>()
                 .AddSingleton<IChat, PublicChat>();
 

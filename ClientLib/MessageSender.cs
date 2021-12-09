@@ -15,27 +15,20 @@ namespace ClientLib
 
         public Task SendToGlobalAsync(HubConnection connection, string message)
         {
-            var arguments = new object[] {_nick, message};
-            return connection.InvokeCoreAsync(HubConstants.MessageHub.Global, arguments);
+            var dto = new GlobalMessageDto { Sender = _nick, Message = message };
+            return connection.SendAsync(HubConstants.MessageHub.Global, dto);
         }
 
         public Task SendToChannelAsync(HubConnection connection, string channel, string message)
         {
-            var arguments = new object[] {_nick, channel, message};
-            return connection.InvokeCoreAsync(HubConstants.MessageHub.Channel, arguments);
+            var dto = new ChannelMessageDto { Sender = _nick, Channel = channel, Message = message };
+            return connection.SendAsync(HubConstants.MessageHub.Channel, dto);
         }
 
         public Task SendToPrivateAsync(HubConnection connection, string receivingUser, string message)
         {
-            var arguments = new object[] {_nick, receivingUser, message};
-            return connection.InvokeCoreAsync(HubConstants.MessageHub.Private, arguments);
+            var dto = new PrivateMessageDto { Sender = _nick, Receiver = receivingUser, Message = message };
+            return connection.SendAsync(HubConstants.MessageHub.Private, dto);
         }
-    }
-
-    public interface IMessageSender
-    {
-        Task SendToGlobalAsync(HubConnection connection, string message);
-        Task SendToChannelAsync(HubConnection connection, string channel, string message);
-        Task SendToPrivateAsync(HubConnection connection, string receivingUser, string message);
     }
 }

@@ -12,17 +12,17 @@ namespace ClientSide
         {
             var provider = ServiceBuilder.Build();
 
-            // var chat = provider.GetService<IChat>();
+            var chat = provider.GetService<IChat>();
             var notification = provider.GetService<INotification>();
 
             const string baseUrl = "http://localhost:5001";
-            // var url = $"{baseUrl}/{HubConstants.MessageHub.Name}";
+            var url = $"{baseUrl}/{HubConstants.MessageHub.Name}";
 
-            // var connection = new HubConnectionBuilder().WithUrl(url).Build();
+            var connection = new HubConnectionBuilder().AddMessagePackProtocol().WithUrl(url).Build();
             notification.GlobalListener += it => Console.WriteLine($"NOTIFICATION: {it}");
 
             await notification.Setup(baseUrl);
-            await Task.Delay(100_000);
+            await chat.ConnectTo(connection);
         }
     }
 }

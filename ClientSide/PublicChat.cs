@@ -17,12 +17,9 @@ namespace ClientSide
         {
             await connection.StartAsync();
 
-            connection.GlobalMessageHandler(
-                (sender, message) => { Console.WriteLine($"[{sender}]: {message}"); });
-            connection.ChannelMessageHandler(
-                (sender, channel, message) => { Console.WriteLine($"({channel})[{sender}]: {message}"); });
-            connection.PrivateMessageHandler(
-                (sender, message) => { Console.WriteLine($"(PM)[{sender}]: {message}"); });
+            connection.GlobalMessageHandler();
+            connection.ChannelMessageHandler();
+            connection.PrivateMessageHandler();
 
             while (true)
             {
