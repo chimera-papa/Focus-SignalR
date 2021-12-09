@@ -1,23 +1,23 @@
-﻿using Microsoft.AspNetCore.SignalR.Client;
+﻿using System.Threading.Tasks;
+using Common;
+using Microsoft.AspNetCore.SignalR.Client;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace ClientSide
 {
-    class Program
+    static class Program
     {
-        static void Main(string[] args)
+        private static async Task Main(string[] args)
         {
             var provider = ServiceBuilder.Build();
 
             var chat = provider.GetService<IChat>();
 
-            var url = "https://localhost:5001/Chat";
+            var url = $"https://localhost:5001/{HubConstants.MessageHub.Name}";
 
             var connection = new HubConnectionBuilder().WithUrl(url).Build();
 
-            MessageReceiver.RegisterHandler(connection);
-
-            chat.ConnectTo(connection).GetAwaiter().GetResult();
+            await chat.ConnectTo(connection);
         }
     }
 }
