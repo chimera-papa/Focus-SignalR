@@ -13,7 +13,7 @@ namespace ClientSide
 
             var chat = provider.GetService<IChat>();
 
-            var url = $"http://localhost:5001/{HubConstants.MessageHub.Name}";
+            var url = $"https://localhost:5001/{HubConstants.MessageHub.Name}";
 
             var connection = new HubConnectionBuilder().WithUrl(url).Build();
 

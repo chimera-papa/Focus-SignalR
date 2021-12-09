@@ -18,7 +18,7 @@ namespace ServerSide.Hubs
         public async Task SendChannelMessage(string nick, string channel, string message)
         {
             Console.WriteLine($"We found those parameter: {nick}, {message}");
-            await Clients.All.SendAsync(HubConstants.MessageHub.Channel, nick, message);
+            await Clients.Groups(channel).SendAsync(HubConstants.MessageHub.Channel, nick, message));
         }
         
         [HubMethodName(HubConstants.MessageHub.Private)]
