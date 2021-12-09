@@ -8,12 +8,12 @@ namespace ServerSide.Hubs
     public class Message : Hub
     {
         [HubMethodName(HubConstants.MessageHub.Global)]
-        public async Task SendGlobalMessage(string nick, string message)
+        public async Task SendGlobalMessage(MessageDto message)
         {
-            Console.WriteLine($"We found those parameter: {nick}, {message}");
-            await Clients.All.SendAsync(HubConstants.MessageHub.Global, nick, message);
+            Console.WriteLine($"We found those parameter: {message.Sender}, {message.Message}");
+            await Clients.All.SendAsync(HubConstants.MessageHub.Global, message);
         }
-        
+
         [HubMethodName(HubConstants.MessageHub.Channel)]
         public async Task SendChannelMessage(string nick, string channel, string message)
         {

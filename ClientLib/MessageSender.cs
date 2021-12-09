@@ -15,8 +15,8 @@ namespace ClientLib
 
         public Task SendToGlobalAsync(HubConnection connection, string message)
         {
-            var arguments = new object[] {_nick, message};
-            return connection.InvokeCoreAsync(HubConstants.MessageHub.Global, arguments);
+            var dto = new MessageDto { Sender = _nick, Message = message };
+            return connection.InvokeAsync(HubConstants.MessageHub.Global, dto);
         }
 
         public Task SendToChannelAsync(HubConnection connection, string channel, string message)
