@@ -28,6 +28,10 @@ namespace ClientSide
             {
                 Console.WriteLine("Send a message to the chat: ");
                 var message = Console.ReadLine();
+                if (string.IsNullOrEmpty(message))
+                {
+                    continue;
+                }
                 if (message == "exit")
                 {
                     return;

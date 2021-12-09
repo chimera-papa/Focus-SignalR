@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.SignalR;
 
 namespace ServerSide.Hubs
 {
-    public class Message : Hub
+    public class MessageHub : Hub
     {
         [HubMethodName(HubConstants.MessageHub.Global)]
         public async Task SendGlobalMessage(string nick, string message)

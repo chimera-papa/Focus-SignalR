@@ -12,8 +12,8 @@
 
         public static class NotificationHub
         {
-            public const string Name = "Notification";
-            public const string Push = "Push";
+            public const string Name = "NotificationHub";
+            public const string Global = "Push";
         }
     }
 }

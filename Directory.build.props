@@ -1,0 +1,5 @@
+<Project>
+    <PropertyGroup>
+        <SwashbuckleVersion>6.2.3</SwashbuckleVersion>
+    </PropertyGroup>
+</Project>
