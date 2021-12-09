@@ -1,0 +1,22 @@
+﻿using Microsoft.Extensions.DependencyInjection;
+using System;
+
+namespace ClientSide
+{
+    public static class ServiceBuilder
+    {
+        public static ServiceProvider Build()
+        {
+            var service = new ServiceCollection();
+
+            Console.WriteLine("Choose a nick: ");
+            var nick = Console.ReadLine();
+
+            service
+                .AddSingleton<ISender>(_ => new MessageSender(nick))
+                .AddSingleton<IChat, PublicChat>();
+
+            return service.BuildServiceProvider();
+        }
+    }
+}
