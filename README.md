@@ -1,20 +1,20 @@
 # Server
-- Check how to send messages to specific users;
-- Scaling;
+- [ ] Check how to send messages to specific users;
+- [ ] Scaling;
 
 # Client
-- Handling messages in a strongly typed manner;
+- [x] Handling messages in a strongly typed manner;
 
 # General
 - Channels:
-  - How to join a channel;
-  - Authorization;
+  - [ ] How to join a channel;
+  - [ ] Authorization;
 - Private:
-  - Block users;
-  - White list;
-  - Authorization (Message to friends);
-- Send notifications;
-- Authentication;
+  - [ ] Block users;
+  - [ ] White list;
+  - [ ] Authorization (Message to friends);
+- [x] Send notifications;
+- [ ] Authentication;
 
 # Future
 - Protobuf;
