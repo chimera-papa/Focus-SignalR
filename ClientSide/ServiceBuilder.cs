@@ -14,7 +14,8 @@ namespace ClientSide
             var nick = Console.ReadLine();
 
             service
-                .AddSingleton<IMessageSender>(_ => new MessageSender(nick))
+                .AddSingleton<IMessageSender>(_ => new MessageSender(nick!))
+                .AddSingleton<INotification, Notification>()
                 .AddSingleton<IChat, PublicChat>();
 
             return service.BuildServiceProvider();
