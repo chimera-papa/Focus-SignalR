@@ -1,0 +1,22 @@
+version: '3.7'
+
+services:
+
+  serverside:
+    environment:
+      - ASPNETCORE_URLS=http://+:80
+    image: ${DOCKER_REGISTRY-}serverside
+    container_name: server_1
+    build:
+      context: .
+      dockerfile: ServerSide/Dockerfile
+    restart: unless-stopped
+    depends_on:
+      - redis
+
+  redis:
+    image: redis:5.0.6
+    container_name: redis
+    restart: unless-stopped
+    ports:
+      - "6379:6379"
