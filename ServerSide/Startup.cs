@@ -3,6 +3,7 @@ using System.IO;
 using System.Reflection;
 using Common;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.OpenApi.Models;
 using ServerSide.Hubs;
@@ -12,9 +13,25 @@ namespace ServerSide
 {
     public class Startup
     {
+        private IConfiguration Configuration { get; }
+        
+        public Startup(IConfiguration configuration)
+        {
+            Configuration = configuration;
+        }
+        
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddSignalR().AddMessagePackProtocol();
+            services
+                .AddSignalR()
+                .AddStackExchangeRedis(Configuration["redisUrl"], options =>
+                {
+                    options.Configuration.AbortOnConnectFail = false;
+                    options.Configuration.AllowAdmin = true;
+                    options.Configuration.ConnectRetry = 5;
+                    options.Configuration.ResolveDns = true;
+                })
+                .AddMessagePackProtocol();
             
             services.AddSwaggerGen(c =>
             {
