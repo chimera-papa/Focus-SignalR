@@ -1,6 +1,6 @@
 # Server
 - [ ] Check how to send messages to specific users;
-- [ ] Scaling;
+- [x] Scaling;
 
 # Client
 - [x] Handling messages in a strongly typed manner;

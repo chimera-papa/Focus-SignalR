@@ -1,9 +1,10 @@
 version: '3.7'
 
 services:
-  serverside:
+  serverside_1:
     environment:
       - ASPNETCORE_URLS=http://+:80
+      - redisUrl=redis
     image: ${DOCKER_REGISTRY-}serverside
     container_name: server_1
     build:
@@ -11,6 +12,21 @@ services:
       dockerfile: ServerSide/Dockerfile
     ports:
       - "90:80"
+    restart: unless-stopped
+    depends_on:
+      - redis
+
+  serverside_2:
+    environment:
+      - ASPNETCORE_URLS=http://+:80
+      - redisUrl=redis
+    image: ${DOCKER_REGISTRY-}serverside
+    container_name: server_2
+    build:
+      context: .
+      dockerfile: ServerSide/Dockerfile
+    ports:
+      - "95:80"
     restart: unless-stopped
     depends_on:
       - redis
