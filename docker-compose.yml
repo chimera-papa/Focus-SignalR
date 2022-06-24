@@ -1,7 +1,6 @@
 version: '3.7'
 
 services:
-
   serverside:
     environment:
       - ASPNETCORE_URLS=http://+:80
@@ -10,6 +9,8 @@ services:
     build:
       context: .
       dockerfile: ServerSide/Dockerfile
+    ports:
+      - "90:80"
     restart: unless-stopped
     depends_on:
       - redis
